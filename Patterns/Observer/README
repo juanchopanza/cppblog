@@ -1,0 +1,12 @@
+Code examples for observer pattern in C++11 blog entry, 
+
+http://juanchopanzacpp.wordpress.com/2013/02/24/simple-observer-pattern-implementation-c11/
+
+Requirements: 
+
+* a reasonably C++11 compliant compiler. Tested with g++ 4.7.2 and a 4.8 snapshot, on various linux distrobutions.
+* gnu make (optional, for building)
+
+Runnable examples are called exampleN.cpp, where N is positive integer. To build using make:
+
+> make example<N>
