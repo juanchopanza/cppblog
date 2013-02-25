@@ -1,3 +1,6 @@
+#ifndef SUBJECT_H_
+#define SUBJECT_H_
+
 #include <functional>
 #include <map>
 #include <vector>
@@ -24,3 +27,4 @@ class Subject
   std::map<Event, std::vector<std::function<void()>>> observers_;
 };
 
+#endif // SUBJECT_H_
