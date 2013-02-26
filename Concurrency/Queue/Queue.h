@@ -20,6 +20,17 @@ class Queue
     return val;
   }
 
+  void pop(T& item)
+  {
+    std::unique_lock<std::mutex> mlock(mutex_);
+    while (queue_.empty())
+    {
+      cond_.wait(mlock);
+    }
+    item = queue_.front();
+    queue_.pop();
+  }
+
   void push(const T& item)
   {
     std::unique_lock<std::mutex> mlock(mutex_);
