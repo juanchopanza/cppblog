@@ -22,8 +22,9 @@ class Queue
 
   void push(const T& item)
   {
-    std::lock_guard<std::mutex> mlock(mutex_);
+    std::unique_lock<std::mutex> mlock(mutex_);
     queue_.push(item);
+    mlock.unlock();
     cond_.notify_one();
   }
 
