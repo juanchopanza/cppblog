@@ -11,7 +11,7 @@ class Subject
  public:
   Subject()=default;
   template <typename Observer>
-  void registerObserver(const Event& event, const Observer& observer)
+  void registerObserver(const Event& event, Observer&& observer)
   {
     observers_[event].push_back(observer);
   }
