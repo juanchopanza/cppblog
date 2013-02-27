@@ -4,6 +4,7 @@
 #include <functional>
 #include <map>
 #include <vector>
+#include <utility> // for std::forward
 
 template <typename Event>
 class Subject
@@ -13,7 +14,7 @@ class Subject
   template <typename Observer>
   void registerObserver(const Event& event, Observer&& observer)
   {
-    observers_[event].push_back(observer);
+    observers_[event].push_back(std::forward<Observer>(observer));
   }
   void notify(const Event& event) const
   {
