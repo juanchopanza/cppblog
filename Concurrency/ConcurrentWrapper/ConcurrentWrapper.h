@@ -3,6 +3,8 @@
 /// Taken from this excellent presentation on C++ concurrency by Herb Sutter:
 /// http://channel9.msdn.com/Shows/Going+Deep/C-and-Beyond-2012-Herb-Sutter-Concurrency-and-Parallelism
 ///
+/// Tweaked to compile with g++ 4.7.2.
+///
 /// Wraps a shared resource such that callers can request operations on the resource asynchronously.
 /// Each request is treated as an atomic transaction, and the caller side is not blocked.
 ///
