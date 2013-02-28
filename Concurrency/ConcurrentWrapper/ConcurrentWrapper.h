@@ -27,7 +27,7 @@
 /// cs([] (std::string& s) { bar(s); foo(s);});
 ///
 /// // Thread 3: make string uppercase
-/// cs([](std::string& s){ for (auto& c : s) std::toupper(c);)} );
+/// cs([](std::string& s){ for (auto& c : s) c = static_cast<char>(std::toupper(c));)} );
 ///
 ///
 
