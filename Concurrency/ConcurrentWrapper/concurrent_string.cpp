@@ -15,7 +15,7 @@ int main()
     v.push_back(
         std::async(std::launch::async,
                    [&,i] {
-                     cs([=](std::string& s) {
+                     cs([&i](std::string& s) {
                           s += std::to_string(i) + std::to_string(i)+ std::to_string(i) ;
                           s += "\n";
                      });
