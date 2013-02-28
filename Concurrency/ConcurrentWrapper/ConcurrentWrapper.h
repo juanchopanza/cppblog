@@ -1,6 +1,7 @@
 ///
 /// A concurrent wrapper for serializing asynchronous access to a shared resource.
-/// Taken from this excellent presentation on C++ concurrency by Herb Sutter:
+/// This is a working version of the concurrent<T> class presented in this excellent presentation 
+/// on C++ concurrency by Herb Sutter:
 /// http://channel9.msdn.com/Shows/Going+Deep/C-and-Beyond-2012-Herb-Sutter-Concurrency-and-Parallelism
 ///
 /// Tweaked to compile with g++ 4.7.2.
