@@ -39,6 +39,9 @@ class Queue
     cond_.notify_one();
   }
 
+  Queue(const Queue&) = delete;            // disable copying
+  Queue& operator=(const Queue&) = delete; // disable assignment
+  
  private:
   std::queue<T> queue_;
   std::mutex mutex_;

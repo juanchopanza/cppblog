@@ -1,6 +1,7 @@
 ///
 /// A concurrent wrapper for serializing asynchronous access to a shared resource.
-/// Taken from this excellent presentation on C++ concurrency by Herb Sutter:
+/// This is a working version of the concurrent<T> class presented in this excellent presentation 
+/// on C++ concurrency by Herb Sutter:
 /// http://channel9.msdn.com/Shows/Going+Deep/C-and-Beyond-2012-Herb-Sutter-Concurrency-and-Parallelism
 ///
 /// Tweaked to compile with g++ 4.7.2.
@@ -26,7 +27,7 @@
 /// cs([] (std::string& s) { bar(s); foo(s);});
 ///
 /// // Thread 3: make string uppercase
-/// cs([](std::string& s){ for (auto& c : s) std::toupper(c);)} );
+/// cs([](std::string& s){ for (auto& c : s) c = static_cast<char>(std::toupper(c));)} );
 ///
 ///
 
