@@ -38,7 +38,7 @@ class Queue
     mlock.unlock();
     cond_.notify_one();
   }
-
+  Queue()=default;
   Queue(const Queue&) = delete;            // disable copying
   Queue& operator=(const Queue&) = delete; // disable assignment
   
