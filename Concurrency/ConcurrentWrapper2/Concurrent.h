@@ -4,7 +4,12 @@
 /// on C++ concurrency by Herb Sutter:
 /// http://channel9.msdn.com/Shows/Going+Deep/C-and-Beyond-2012-Herb-Sutter-Concurrency-and-Parallelism
 ///
-/// Tweaked to compile with g++ 4.7.2.
+/// This is an extension of the concurrent wrapper presented in this blog:
+/// http://juanchopanzacpp.wordpress.com/2013/03/01/concurrent-object-wrapper-c11/ 
+///
+/// Currently does not compile on gcc 4.7 or 4.8 due to a compiler bug related 
+/// to decltype of member variables used in a trailing return type.
+/// This is expected to be fixed in GCC 4.8.1.
 ///
 /// Wraps a shared resource such that callers can request operations on the resource asynchronously.
 /// Each request is treated as an atomic transaction, and the caller side is not blocked.
@@ -15,20 +20,27 @@
 /// Example useage:
 ///
 /// @code
-/// Concurrent<std::string> cs;
+/// Concurrent<std::vector<int>> cv;
 ///
-/// //Thread 1: just print the string
-/// cs([](const std::string& s){ std::cout << s;});
+/// //1: Resize the vector, fill with sequence
+/// auto f1 = cv([](std::vector<int>& v)->size_t{ v.resize(10);
+///                                               std::iota(v.begin(), v.end(), 0);
+///                                               return v.size();
+///                                              });
+///
+/// //2. Calculate the sum of elements
+/// auto f2 = cv([](const std::vector<int>& v){ return std::accumulate(v.begin(), v.end(), 0);});
 /// 
-/// // Thread 2:
-/// void foo(std::string& s);
-/// void bar(std::string& s);
+/// //3: Call some user defined functions
+/// int foo(std::vector<int>& v);
+/// void bar(std::vector<int>& v);
 /// // run bar, then foo on the shared resource
-/// cs([] (std::string& s) { bar(s); foo(s);});
+/// auto f3 = cs([] (std::vector<int>& v)->int { bar(v); 
+///                                              return foo(v);
+///                                            });
 ///
-/// // Thread 3: make string uppercase
-/// cs([](std::string& s){ for (auto& c : s) c = static_cast<char>(std::toupper(c));)} );
-///
+/// //4 get the results when needed
+/// std::cout << f1.get() << " " << f2.get() " " << f3.get() << std::endl;
 ///
 
 #include <functional>
