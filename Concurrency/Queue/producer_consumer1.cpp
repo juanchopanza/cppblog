@@ -9,7 +9,7 @@ void produce(Queue<int>& q) {
 }
 
 void consume(Queue<int>& q, unsigned int id) {
-  for (int i = 0; i< 10000; ++i) {
+  for (int i = 0; i< 2500; ++i) {
     auto item = q.pop();
     std::cout << "Consumer " << id << " popped " << item << "\n";
   }
