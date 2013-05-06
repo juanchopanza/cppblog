@@ -1,9 +1,9 @@
-#CXX := /usr/bin/g++-4.8
+CXX := /usr/bin/g++-4.7
+#CXX := clang++
 CPPFLAGS := -I..
 CXXFLAGS := -Wall -Wextra -pedantic-errors -std=c++11 -O2 -pthread
 
-concurrent_string : Concurrent.h ../Queue/Queue.h
+DEPS = Concurrent.h ../Queue/Queue.h
 
-concurrent_string2 : Concurrent.h ../Queue/Queue.h
-
-concurrent_vector : Concurrent.h ../Queue/Queue.h
+% : %.cpp $(DEPS)
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) $< -o $@
