@@ -68,6 +68,14 @@ class Concurrent
     worker_.join();
   }
 
+ private:
+
+  mutable Queue<std::function<void()>> queue_;
+  mutable T resource_;
+  std::thread worker_;
+  bool done_;
+
+ public:
   template <typename F>
   auto operator()(F f) const -> std::future<decltype(f(resource_))>
   {
@@ -81,11 +89,5 @@ class Concurrent
     return fut;
   }
 
- private:
-
-  mutable Queue<std::function<void()>> queue_;
-  mutable T resource_;
-  std::thread worker_;
-  bool done_;
 
 };
