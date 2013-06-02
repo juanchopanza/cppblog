@@ -7,7 +7,9 @@
 /// This is an extension of the concurrent wrapper presented in this blog:
 /// http://juanchopanzacpp.wordpress.com/2013/03/01/concurrent-object-wrapper-c11/ 
 ///
-/// Currently does not compile on gcc 4.7 or 4.8 due to a compiler bug related 
+/// Tested on GCC 4.7.3.
+//?
+/// Currently does not compile on gcc 4.8 due to a compiler bug related 
 /// to decltype of member variables used in a trailing return type.
 /// This is expected to be fixed in GCC 4.8.1.
 ///
@@ -49,6 +51,23 @@
 #include <exception>
 #include "Queue/Queue.h"
 
+namespace
+{
+template <typename Fut, typename Fun, typename T>
+void promise_set_value(std::promise<Fut>& prom, Fun& f, T& t)
+{
+  prom.set_value(f(t));
+}
+
+template <typename Fun, typename T>
+void promise_set_value(std::promise<void>& prom, Fun& f, T& t)
+{
+  f(t);
+  prom.set_value();
+}
+
+} // anonymous namespace
+
 template <typename T>
 class Concurrent
 {
@@ -82,8 +101,8 @@ class Concurrent
     auto prom = std::make_shared<std::promise<decltype(f(resource_))>>();
     auto fut = prom->get_future();     
     queue_.push([=]{
-                     try { prom->set_value(f(resource_)); }
-                     catch(...) { prom->set_exception(std::current_exception()); }
+                     try { promise_set_value(*prom, f, resource_); }
+                     catch(std::exception&) { prom->set_exception(std::current_exception()); }
                    }
                );
     return fut;

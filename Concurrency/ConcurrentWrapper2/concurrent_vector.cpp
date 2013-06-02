@@ -32,6 +32,8 @@ int main()
                  return v.size();
                });
 
+  auto f5 = cv([](std::vector<int>&){});
+
   std::cout << std::boolalpha;
   std::cout << f1.get() << std::endl;
   std::cout << f2.get() << std::endl;
