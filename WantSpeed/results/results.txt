@@ -1,11 +1,26 @@
-Binary operator:
+================================================================================================
+
+Tesf of the effect of passing a parameter that is returned
+from a function or operator by value vs. passing by const reference.
+Inspired by the implementation
+
+T operator+(T lhs, const T& rhs)
+{
+  lhs += rhs;
+  return lhs;
+}
+
+
+Tested binary operators:
 
 Trad    : T operator+(const& T lhs, const& T rhs); 
 ByValue : T operator+(T lhs, const T& rhs); 
 
 Trad makes local copy of lhs. Both use operator+= .
 
-====================================================================
+Tested with G++ 4.8.2 and CLANG 3.4, both macports on Mac OSX.
+
+================================================================================================
 
 Case 1.
 
@@ -19,7 +34,7 @@ T with (without) move copy and assignment.
 Trad    (no move) |   2 (2)       |   1 (1)   |    0 (0)       |   3 (3)    |
 ByValue (no move) |   2 (2)       |   1 (2)   |    1 (0)       |   4 (4)    |
 
-====================================================================
+================================================================================================
 
 Case 2.
 
