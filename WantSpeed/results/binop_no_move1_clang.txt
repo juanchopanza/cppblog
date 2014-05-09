@@ -1,0 +1,18 @@
+========== Foo ==============
+Default constructor
+Default constructor
+Copy constructor
+=============================
+Destructor
+Destructor
+Destructor
+========== Bar ==============
+Default constructor
+Default constructor
+Copy constructor
+Copy constructor
+Destructor
+=============================
+Destructor
+Destructor
+Destructor
