@@ -59,7 +59,7 @@ T with (without) move copy and assignment.
                   |  Default Ctor | Copy Ctor | Move Copy Ctor | Destrictor |
                   |----------------------------------------------------------
 Trad    (no move) |   2 (2)       |   1 (1)   |    0 (0)       |   3 (3)    |
-ByValue (no move) |   2 (2)       |   0 (1)   |    0 (0)       |   3 (3)    |
+ByValue (no move) |   2 (2)       |   0 (1)   |    1 (0)       |   3 (3)    |
 
 ================================================================================================
 
