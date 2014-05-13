@@ -1,7 +1,8 @@
-#CC = /opt/local/bin/gcc-mp-4.8
-#CXX = /opt/local/bin/g++-mp-4.8
-#CXX = /opt/local/bin/clang++-mp-3.4
-#CC = /opt/local/bin/clang-mp-3.3
-CXXFLAGS += -Wall -Wextra -Wconversion -Wno-missing-field-initializers -pedantic-errors -std=c++11 -pthread -O2
-CFLAGS += -Wall -Wextra -Wconversion -Wno-missing-field-initializers -pedantic-errors -pthread -O2
+CXXFLAGS += -Wall -Wextra -Wconversion -Wno-missing-field-initializers -pedantic-errors -std=c++11  -O2
+
+case%_no_move : case%_no_move.cpp Bar_no_move.h Foo_no_move.h Makefile
+	$(CXX) $(CXXFLAGS) $<  -o $@ 
+
+case% : case%.cpp Bar.h Foo.h Makefile
+	$(CXX) $(CXXFLAGS) $<  -o $@ 
 
