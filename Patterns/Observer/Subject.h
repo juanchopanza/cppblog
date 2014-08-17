@@ -1,3 +1,9 @@
+//
+// Copyright (c) 2013 Juan Palacios juan.palacios.puyana@gmail.com
+// Subject to the BSD 2-Clause License
+// - see < http://opensource.org/licenses/BSD-2-Clause>
+//
+
 #ifndef SUBJECT_H_
 #define SUBJECT_H_
 
