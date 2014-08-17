@@ -1,3 +1,13 @@
+//
+// Copyright (c) 2013 Juan Palacios juan.palacios.puyana@gmail.com
+// This file is part of minimathlibs.
+// Subject to the BSD 2-Clause License
+// - see < http://opensource.org/licenses/BSD-2-Clause>
+//
+
+#ifndef CONCURRENT_QUEUE_
+#define CONCURRENT_QUEUE_
+
 #include <queue>
 #include <thread>
 #include <mutex>
@@ -48,4 +58,4 @@ class Queue
   std::condition_variable cond_;
 };
 
-
+#endif
