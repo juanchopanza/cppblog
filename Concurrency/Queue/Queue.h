@@ -39,6 +39,19 @@ class Queue
     item = queue_.front();
     queue_.pop();
   }
+  
+  template <class Timespan>
+  bool tryPop(T& item, const Timespan& timeout)
+  {
+    std::unique_lock<std::mutex> mlock(mutex_);
+    if (queue_.empty() && cond_.wait_for(mlock, timeout) == std::cv_status::timeout)
+    {
+      return false;
+    }
+    item = queue_.front();
+    queue_.pop();
+    return true;
+  }
 
   void push(const T& item)
   {
