@@ -40,8 +40,8 @@ class Queue
     queue_.pop();
   }
   
-  template <class Timespan>
-  bool tryPop(T& item, const Timespan& timeout)
+  template <typename Rep, typename Period>
+  bool tryPop(T& item, const std::chrono::duration<Rep, Period>& timeout)
   {
     std::unique_lock<std::mutex> mlock(mutex_);
     if (queue_.empty() && cond_.wait_for(mlock, timeout) == std::cv_status::timeout)
