@@ -8,6 +8,8 @@
 
 #include <algorithm> // C++03 std::swap
 
+namespace blg
+{
 /// A trivial (and incomplete) C++03 value pointer example.
 ///
 /// Requires T to have a T* T::clone() member function.
@@ -54,5 +56,7 @@ struct value_ptr
  private:
     pointer ptr_;
 };
+
+} // namespace blg
 
 #endif
